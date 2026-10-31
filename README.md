@@ -1,92 +1,39 @@
-# youTube_videoAssessmentAPI
-This project helps mentors evaluate students based on their Python knowledge, practical coding demonstrations, communication skills and video presentation quality.
 # YouTube Video Assessment System
 
 ## 1. Project Overview
 
-The YouTube Video Assessment System is a full-stack web application developed using React.js, Node.js, Express.js, and MySQL.
+The **YouTube Video Assessment System** is a web-based application designed to evaluate students' technical knowledge, presentation skills, communication skills, and practical understanding through YouTube video presentations.
 
-This application helps mentors evaluate students based on their Python knowledge, practical coding demonstrations, communication skills, and YouTube video presentations.
+Mentors can evaluate student videos using predefined assessment criteria and assign scores out of 100.
 
-The system provides an interactive frontend for mentors to assess students and a backend API to process and store assessment records in a MySQL database.
+The system calculates the total score and determines the student's readiness level based on the assessment results.
 
 ## 2. Project Purpose
 
-The main purpose of this project is to develop a digital platform for evaluating students through video-based technical assessments.
+The main purpose of this project is to provide a structured platform for evaluating students through video-based assessments.
 
-Students present Python topics through video presentations. Mentors evaluate their performance using predefined assessment criteria and assign marks from 0 to 10 for each criterion.
+It helps mentors:
 
-The system automatically calculates the total score out of 100 and determines the student's readiness level.
+* Evaluate students' technical knowledge.
+* Check practical implementation skills.
+* Assess communication and presentation skills.
+* Provide feedback to students.
+* Track students' performance.
 
-It also maintains assessment records so that mentors can view, update, and manage student evaluation results.
+## 3. Technologies Used
 
-## 3. Key Features
+| Layer       | Technology         |
+| ----------- | ------------------ |
+| Frontend    | React.js           |
+| Backend     | Python FastAPI     |
+| Database    | MySQL              |
+| API Server  | Uvicorn            |
+| API Testing | Postman            |
+| Code Editor | Visual Studio Code |
 
-* Display student information.
-* Display mentor information.
-* Display available Python topics.
-* Create video-based student assessments.
-* Evaluate students using 10 assessment criteria.
-* Assign marks from 0 to 10 for each criterion.
-* Automatically calculate total marks out of 100.
-* Automatically determine student readiness levels.
-* Add mentor feedback.
-* View assessment reports.
-* Update assessment records.
-* Delete assessment records.
-* Store assessment data in MySQL.
+## 4. Assessment Criteria
 
-## 4. Technologies Used
-
-| Technology | Purpose                          |
-| ---------- | -------------------------------- |
-| React.js   | Frontend user interface          |
-| JavaScript | Application logic                |
-| HTML5      | Web page structure               |
-| CSS3       | UI styling                       |
-| Node.js    | Backend runtime environment      |
-| Express.js | REST API development             |
-| MySQL      | Database management              |
-| MySQL2     | Node.js and MySQL connectivity   |
-| CORS       | Frontend-backend communication   |
-| Nodemon    | Automatic backend server restart |
-| Postman    | API testing                      |
-
-## 5. System Architecture
-
-The application follows a full-stack architecture.
-
-```text
-             React Frontend
-                   |
-                   | HTTP Requests
-                   v
-              Express Routes
-                   |
-                   v
-               Controller
-                   |
-                   v
-                Service
-                   |
-                   v
-               Repository
-                   |
-                   v
-              MySQL Database
-```
-
-### Backend Architecture Responsibilities
-
-* **Routes:** Define API endpoints.
-* **Controller:** Handle HTTP requests and responses.
-* **Service:** Implement business logic and validations.
-* **Repository:** Execute SQL queries.
-* **Config:** Manage database connections.
-
-## 6. Assessment Criteria
-
-Each criterion is evaluated from 0 to 10 marks.
+The system evaluates students based on 10 criteria:
 
 1. Depth of Understanding
 2. Practical Demonstration
@@ -99,9 +46,11 @@ Each criterion is evaluated from 0 to 10 marks.
 9. AI Literacy and Independent Thinking
 10. Professionalism and Audience Engagement
 
-**Total Marks: 100**
+Each criterion is scored from 0 to 10.
 
-## 7. Student Readiness Levels
+**Maximum Total Score: 100**
+
+## 5. Readiness Levels
 
 | Score  | Readiness Level           |
 | ------ | ------------------------- |
@@ -111,7 +60,27 @@ Each criterion is evaluated from 0 to 10 marks.
 | 40–59  | Needs guided practice     |
 | 0–39   | Rebuild fundamentals      |
 
-## 8. Project Folder Structure
+## 6. Project Architecture
+
+The project follows a layered architecture.
+
+### Frontend
+
+React.js is used to create the user interface and display assessment information.
+
+### Backend
+
+Python FastAPI handles API requests and business logic.
+
+### Database
+
+MySQL stores student, mentor, topic, and assessment information.
+
+### Backend Request Flow
+
+Routes → Controllers → Services → Repositories → MySQL Database
+
+## 7. Project Folder Structure
 
 ```text
 youTube_videoAssessmentAPI/
@@ -120,237 +89,189 @@ youTube_videoAssessmentAPI/
 │   ├── public/
 │   ├── src/
 │   │   ├── components/
+│   │   │   ├── Header.jsx
+│   │   │   ├── StudentInformation.jsx
+│   │   │   ├── AssessmentRubric.jsx
+│   │   │   ├── CriterionCard.jsx
+│   │   │   ├── OverallResult.jsx
+│   │   │   ├── ScoringGuide.jsx
+│   │   │   └── Footer.jsx
+│   │   │
 │   │   ├── services/
 │   │   ├── App.jsx
+│   │   ├── App.css
 │   │   └── main.jsx
+│   │
 │   └── package.json
 │
 ├── backend/
 │   ├── config/
-│   │   └── db.js
+│   │   └── database.py
+│   │
+│   ├── models/
 │   │
 │   ├── repositories/
-│   │   ├── studentRepository.js
-│   │   ├── mentorRepository.js
-│   │   ├── topicRepository.js
-│   │   └── assessmentRepository.js
+│   │   ├── student_repository.py
+│   │   ├── mentor_repository.py
+│   │   ├── topic_repository.py
+│   │   └── assessment_repository.py
 │   │
 │   ├── services/
-│   │   ├── studentService.js
-│   │   ├── mentorService.js
-│   │   ├── topicService.js
-│   │   └── assessmentService.js
+│   │   ├── student_service.py
+│   │   ├── mentor_service.py
+│   │   ├── topic_service.py
+│   │   └── assessment_service.py
 │   │
 │   ├── controllers/
-│   │   ├── studentController.js
-│   │   ├── mentorController.js
-│   │   ├── topicController.js
-│   │   └── assessmentController.js
+│   │   ├── student_controller.py
+│   │   ├── mentor_controller.py
+│   │   ├── topic_controller.py
+│   │   └── assessment_controller.py
 │   │
 │   ├── routes/
-│   │   ├── studentRoutes.js
-│   │   ├── mentorRoutes.js
-│   │   ├── topicRoutes.js
-│   │   └── assessmentRoutes.js
+│   │   ├── student_routes.py
+│   │   ├── mentor_routes.py
+│   │   ├── topic_routes.py
+│   │   └── assessment_routes.py
 │   │
-│   ├── server.js
-│   └── package.json
+│   ├── main.py
+│   └── requirements.txt
 │
 └── README.md
 ```
 
-## 9. Software Requirements
+## 8. Software Requirements
 
-Install the following software before starting the project:
+Install the following software:
 
-* Node.js
-* Visual Studio Code
-* MySQL Server
-* MySQL Workbench (optional)
-* Postman (for API testing)
+1. Python
+2. MySQL Server
+3. MySQL Workbench
+4. Visual Studio Code
+5. Node.js and npm (for React frontend development only)
 
-## 10. Installation and Setup
+## 9. Backend Installation and Setup
 
-### Step 1: Clone or Open the Project
+### Step 1: Open Backend Folder
 
-Open the project folder in VS Code.
-
-### Step 2: Frontend Setup
-
-Open a terminal:
-
-```bash
-cd frontend
-```
-
-Install frontend dependencies:
-
-```bash
-npm install
-```
-
-If creating the React application from scratch using Vite:
-
-```bash
-npm create vite@latest frontend -- --template react
-cd frontend
-npm install
-```
-
-### Step 3: Backend Setup
-
-Open another terminal:
-
-```bash
+```powershell
 cd backend
 ```
 
-Initialize Node.js:
+### Step 2: Create Python Virtual Environment
 
-```bash
-npm init -y
+```powershell
+python -m venv venv
 ```
 
-Install backend dependencies:
+### Step 3: Activate Virtual Environment
 
-```bash
-npm install express mysql2 cors
+```powershell
+venv\Scripts\activate
 ```
 
-Install Nodemon:
+### Step 4: Install Required Packages
 
-```bash
-npm install --save-dev nodemon
+```powershell
+pip install fastapi uvicorn mysql-connector-python
 ```
 
-### Step 4: Database Setup
+### Step 5: Save Dependencies
 
-Open MySQL Workbench.
-
-Create the database:
-
-```sql
-CREATE DATABASE python_mentor_assessment;
+```powershell
+pip freeze > requirements.txt
 ```
 
-Create the required tables:
+### Step 6: Run Backend Server
+
+```powershell
+uvicorn main:app --reload
+```
+
+Backend URL:
+
+```text
+http://127.0.0.1:8000
+```
+
+FastAPI Swagger Documentation:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+## 10. Frontend Installation and Setup
+
+### Step 1: Open Frontend Folder
+
+```powershell
+cd frontend
+```
+
+### Step 2: Install Dependencies
+
+```powershell
+npm install
+```
+
+### Step 3: Run React Application
+
+```powershell
+npm run dev
+```
+
+Frontend URL:
+
+```text
+http://localhost:5173
+```
+
+## 11. Database
+
+Database: `youtube_video_assessment`
+
+Main tables:
 
 * Student_information
 * Mentor_Information
 * Topics
 * Assessment
 
-Ensure the table names and columns match the backend SQL queries.
+The Assessment table connects students, mentors, and topics using foreign keys.
 
-### Step 5: Database Configuration
+It stores assessment scores, total score, readiness level, mentor feedback, and assessment date.
 
-Open:
+## 12. Application Workflow
 
-```text
-backend/config/db.js
-```
+1. Student information is selected.
+2. Mentor information is selected.
+3. Assessment topic is selected.
+4. Mentor evaluates the student's video.
+5. Mentor assigns scores for all 10 criteria.
+6. System calculates the total score.
+7. System determines the readiness level.
+8. Assessment results are saved in MySQL.
+9. Assessment details can be retrieved through the API.
 
-Configure your MySQL connection details:
+## 13. Future Enhancements
 
-```javascript
-const mysql = require("mysql2/promise");
+* Student login and authentication.
+* Mentor login and authentication.
+* YouTube video URL integration.
+* Assessment history.
+* Student performance dashboard.
+* PDF assessment report.
+* Admin dashboard.
+* Integration with TFLCoMentor.
 
-const db = mysql.createPool({
-    host: "localhost",
-    user: "root",
-    password: "YOUR_MYSQL_PASSWORD",
-    database: "python_mentor_assessment"
-});
-
-module.exports = db;
-```
-
-Replace `YOUR_MYSQL_PASSWORD` with your actual MySQL password.
-
-## 11. How to Run the Project
-
-The frontend and backend must run in separate terminals.
-
-### Terminal 1: Start Backend
-
-```bash
-cd backend
-npm run dev
-```
-
-Expected output:
-
-```text
-MySQL Connected Successfully
-Server running at http://localhost:3000
-```
-
-### Terminal 2: Start Frontend
-
-```bash
-cd frontend
-npm run dev
-```
-
-Vite will display the frontend URL, usually:
-
-```text
-http://localhost:5173
-```
-
-Open this URL in your browser.
-
-## 12. API Endpoints
-
-Base URL:
-
-```text
-http://localhost:3000
-```
-
-| Method | Endpoint             | Description           |
-| ------ | -------------------- | --------------------- |
-| GET    | /api/students        | Get all students      |
-| GET    | /api/mentors         | Get all mentors       |
-| GET    | /api/topics          | Get all Python topics |
-| POST   | /api/assessments     | Create assessment     |
-| GET    | /api/assessments     | Get all assessments   |
-| GET    | /api/assessments/:id | Get assessment by ID  |
-| PUT    | /api/assessments/:id | Update assessment     |
-| DELETE | /api/assessments/:id | Delete assessment     |
-
-## 13. Application Workflow
-
-1. Mentor opens the React application.
-2. The application retrieves student, mentor, and topic information from the backend APIs.
-3. Mentor selects a student and Python topic.
-4. Mentor evaluates the student's video presentation.
-5. Mentor assigns marks for all 10 criteria.
-6. React sends the assessment data to the Node.js backend.
-7. Backend validates the scores and calculates the total.
-8. Backend determines the readiness level.
-9. Assessment information is saved in MySQL.
-10. Mentor can view and manage assessment records.
-
-## 14. Future Enhancements
-
-* User authentication and authorization.
-* Separate mentor and student dashboards.
-* Student assessment history.
-* PDF assessment report generation.
-* Video URL management.
-* Assessment analytics and progress tracking.
-
----
+## 14. Project Information
 
 **Project Name:** YouTube Video Assessment System
 
-**Application Type:** Full Stack Web Application
-
 **Frontend:** React.js
 
-**Backend:** Node.js + Express.js
+**Backend:** Python FastAPI
 
 **Database:** MySQL
 
-**Architecture:** Repository-Service-Controller
+**Architecture:** Routes → Controllers → Services → Repositories → Database
